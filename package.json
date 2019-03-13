@@ -1,0 +1,30 @@
+{
+  "name": "qunit-puppeteer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "qunit-puppeteer.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JackFallows/qunit-puppeteer.git"
+  },
+  "author": "Jack Fallows",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JackFallows/qunit-puppeteer/issues"
+  },
+  "homepage": "https://github.com/JackFallows/qunit-puppeteer#readme",
+  "dependencies": {
+    "glob": "^7.1.3",
+    "puppeteer": "^1.13.0",
+    "string-hash": "^1.1.3",
+    "xml-escape": "^1.1.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "gulp": "^3.9.1",
+    "mocha": "^6.0.2"
+  }
+}
