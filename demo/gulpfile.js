@@ -7,30 +7,30 @@ gulp.task("prepare", () => {
         .pipe(gulp.dest("./node_modules/qunit/qunit"));
 });
 
-(function start() {
-    const run = initialise("./test/*.js", {
-        globalDependencies: ["./test-namespaces.js"],
-        dependencies: { "tests3": ["./test-namespaces-2.js"] },
-        htmlBody: {
-            "tests3": "<span id='my-elem'></span>"
-        }
-    });
+const run = initialise("./test/*.js", {
+    globalDependencies: ["./test-namespaces.js"],
+    // dependencies: { "tests3": ["./test-namespaces-2.js"] },
+    htmlBody: {
+        "tests3": "<span id='my-elem'></span>"
+    },
+    consolePassthrough: true,
+    debug: false
+});
 
-    for (const suite of run.suites) {
-        gulp.task("run-" + suite.name, ["prepare"], async function () {
-            const results = await run(suite.name);
-            
-            const xml = compileXml(results);
-
-            fs.writeFileSync("TestResults.xml", xml);
-        });
-    }
-
-    gulp.task("run-all", ["prepare"], async function () {
-        const results = await run();
+for (const suite of run.suites) {
+    gulp.task("run-" + suite.name, ["prepare"], async function () {
+        const results = await run(suite.name);
 
         const xml = compileXml(results);
 
         fs.writeFileSync("TestResults.xml", xml);
     });
-})();
+}
+
+gulp.task("run-all", ["prepare"], async function () {
+    const results = await run();
+
+    const xml = compileXml(results);
+
+    fs.writeFileSync("TestResults.xml", xml);
+});

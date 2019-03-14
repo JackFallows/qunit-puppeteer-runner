@@ -1,3 +1,7 @@
+window.sources = [
+    "./test-namespaces-2.js"
+];
+
 QUnit.module("namespaces");
 
 QUnit.test("window.TopLevel.SecondLevel3 exists", function (assert) {
