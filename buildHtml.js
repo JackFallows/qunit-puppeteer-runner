@@ -1,5 +1,3 @@
-const path = require("path");
-
 function buildHtml(dependencies, testsSource, htmlBody) {
     return `
 <html>
@@ -16,8 +14,8 @@ function buildHtml(dependencies, testsSource, htmlBody) {
     
         QUnit.config.autostart = false;
     </script>
-    ${dependencies.map(d => `<script src="${path.resolve(d)}"></script>`).join("\n\t")}
-    ${`<script src="${path.resolve(testsSource)}"></script>`}
+    ${dependencies.map(d => `<script src="${d}"></script>`).join("\n\t")}
+    ${`<script src="${testsSource}"></script>`}
     <script>
         function runTests() {
             return new Promise(resolve => {

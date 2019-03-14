@@ -7,18 +7,30 @@ gulp.task("prepare", () => {
         .pipe(gulp.dest("./node_modules/qunit/qunit"));
 });
 
-gulp.task("default", ["prepare"], async function () {
-    const run = await initialise("./test/*.js", {
+(function start() {
+    const run = initialise("./test/*.js", {
         globalDependencies: ["./test-namespaces.js"],
         dependencies: { "tests3": ["./test-namespaces-2.js"] },
         htmlBody: {
             "tests3": "<span id='my-elem'></span>"
         }
     });
-    
-    const results = await run();
-    
-    const xml = compileXml(results);
-    
-    fs.writeFileSync("TestResults.xml", xml);
-});
+
+    for (const suite of run.suites) {
+        gulp.task("run-" + suite.file, ["prepare"], async function () {
+            const results = await run(suite);
+            
+            const xml = compileXml(results);
+
+            fs.writeFileSync("TestResults.xml", xml);
+        });
+    }
+
+    gulp.task("run-all", ["prepare"], async function () {
+        const results = await run();
+
+        const xml = compileXml(results);
+
+        fs.writeFileSync("TestResults.xml", xml);
+    });
+})();
