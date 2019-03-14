@@ -17,8 +17,8 @@ gulp.task("prepare", () => {
     });
 
     for (const suite of run.suites) {
-        gulp.task("run-" + suite.file, ["prepare"], async function () {
-            const results = await run(suite);
+        gulp.task("run-" + suite.name, ["prepare"], async function () {
+            const results = await run(suite.name);
             
             const xml = compileXml(results);
 

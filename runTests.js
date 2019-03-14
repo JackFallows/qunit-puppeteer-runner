@@ -1,4 +1,5 @@
 const puppeteer = require("puppeteer");
+const path = require("path");
 
 const runTests = async function (suites, consolePassthrough, debug) {
     const browser = await puppeteer.launch({ devtools: !!debug });
@@ -19,7 +20,7 @@ const runTests = async function (suites, consolePassthrough, debug) {
     const testResults = [];
     for (const suite of suites) {
         const html = suite.html;
-        await page.goto("file://" + html);
+        await page.goto("file://" + path.resolve(html));
 
         const { overall, results } = await page.evaluate("runTests()");
         testResults.push({ file: suite.file, overall, results });
