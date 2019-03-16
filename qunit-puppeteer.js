@@ -3,10 +3,10 @@ const fs = require("fs");
 const glob = require("glob");
 const hashCode = require("string-hash");
 
-const compileXml = require("./compileXml");
-const runTests = require("./runTests");
-const prepareOptions = require("./prepareOptions");
-const buildHtml = require("./buildHtml");
+const compileXml = require("./compile-xml");
+const runTests = require("./run-tests");
+const prepareOptions = require("./prepare-options");
+const buildHtml = require("./build-html");
 
 const initialise = function (globString, options) {
     let files = [];
