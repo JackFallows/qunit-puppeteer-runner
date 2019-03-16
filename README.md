@@ -1,4 +1,4 @@
-# gulp-qunit-puppeteer
+# qunit-puppeteer
 Runs QUnit tests in a Puppeteer instance and compiles the results to JUnit XML.
 
 # Requirements
