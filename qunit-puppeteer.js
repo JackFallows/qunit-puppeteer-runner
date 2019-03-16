@@ -8,16 +8,16 @@ const runTests = require("./run-tests");
 const prepareOptions = require("./prepare-options");
 const buildHtml = require("./build-html");
 
-const initialise = function (globString, options) {
+const initialise = function (sources, options) {
     let files = [];
     try {
-        files = glob.sync(globString);
+        files = glob.sync(sources);
     } catch (e) {
         console.error(e);
         return false;
     }
 
-    const { consolePassthrough, debug } = options;
+    const { consolePassthrough, debug } = (options || {});
 
     const suites = files.map(f => ({ name: path.basename(f, path.extname(f)), file: f }));
 
@@ -65,7 +65,7 @@ const initialise = function (globString, options) {
         return results;
     }
 
-    run.suites = suites;
+    run.suites = suites.map(s => s.name);
 
     return run;
 };

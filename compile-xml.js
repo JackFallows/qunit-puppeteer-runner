@@ -15,7 +15,7 @@ const compileXml = function (testResults) {
     ${runResults.map(({ file, overall, results }) =>
             `<testsuite name="${xmlescape(file)}" tests="${overall.total}" failures="${overall.failed}" errors="0" skipped="0" timestamp="${new Date().toGMTString()}" time="${overall.runtime}">
         ${results.map(r => `<testcase classname="${xmlescape(r.module)}" name="${xmlescape(r.name)}" time="${r.runtime}"${r.failed === 0 ? '/>' : '>'}${writeFailure(r)}${r.failed === 0 ? '' : '</testcase>'}`).join('\n\t\t')}
-    </testsuite>`)}
+    </testsuite>`).join("\n\t")}
 </testsuites>
         `;
     }

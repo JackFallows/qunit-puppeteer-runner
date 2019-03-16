@@ -18,8 +18,8 @@ const run = initialise("./test/*.js", {
 });
 
 for (const suite of run.suites) {
-    gulp.task("run-" + suite.name, ["prepare"], async function () {
-        const results = await run(suite.name);
+    gulp.task("run-" + suite, ["prepare"], async function () {
+        const results = await run(suite);
 
         logResults(results);
         const xml = compileXml(results);
