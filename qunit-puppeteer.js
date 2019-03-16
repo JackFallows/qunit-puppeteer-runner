@@ -33,7 +33,7 @@ const initialise = function (globString, options) {
                 const fileName = `${suiteName}-${hashCode(htmlContent)}.html`;
                 fs.writeFileSync(fileName, htmlContent);
                 
-                const results = await runTests([{ file: suite.file, html: fileName }], consolePassthrough, debug);
+                const results = await runTests([{ file: suite.file, name: suite.name, html: fileName }], consolePassthrough, debug);
                 
                 fs.unlinkSync(fileName);
                 
@@ -49,11 +49,11 @@ const initialise = function (globString, options) {
             const fileName = `${suite.name}-${hashCode(htmlContent)}.html`;
             fs.writeFileSync(fileName, htmlContent);
             
-            return { file: suite.file, html: fileName };
+            return { file: suite.file, name: suite.name, html: fileName };
         });
         
         const results = await runTests(suitesHtml, consolePassthrough, debug);
-        
+
         for (const suite of suitesHtml) {
             fs.unlinkSync(suite.html);
         }
@@ -66,4 +66,13 @@ const initialise = function (globString, options) {
     return run;
 };
 
-module.exports = { initialise, compileXml };
+function logResults(result) {
+    if (result.overall.failed > 0) {
+        // errored
+        console.error(result.suite, result.overall);
+    } else {
+        console.log(result.suite, result.overall);
+    }
+}
+
+module.exports = { initialise, logResults, compileXml };

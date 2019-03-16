@@ -23,7 +23,7 @@ const runTests = async function (suites, consolePassthrough, debug) {
         await page.goto("file://" + path.resolve(html));
 
         const { overall, results } = await page.evaluate("runTests()");
-        testResults.push({ file: suite.file, overall, results });
+        testResults.push({ file: suite.file, suite: suite.name, overall, results });
     }
 
     await browser.close();
