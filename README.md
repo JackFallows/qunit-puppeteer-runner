@@ -16,7 +16,7 @@ npm install --save-dev qunit-puppeteer
 ```
 const gulp = require("gulp");
 const fs = require("fs");
-const { initialise, logResults, compileXml } = require("../qunit-puppeteer");
+const { initialise, logResults, compileXml } = require("qunit-puppeteer");
 
 const run = initialise("./test/*.js", {
     globalDependencies: ["./test-namespaces.js"]
