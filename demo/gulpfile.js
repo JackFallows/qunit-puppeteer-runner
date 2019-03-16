@@ -21,21 +21,27 @@ for (const suite of run.suites) {
     gulp.task("run-" + suite.name, ["prepare"], async function () {
         const results = await run(suite.name);
 
-        logResults(results[0]);
+        logResults(results);
         const xml = compileXml(results);
 
         fs.writeFileSync("TestResults.xml", xml);
+
+        if (results.find(r => r.overall.failed > 0)) {
+            throw new Error("Tests did not pass.");
+        }
     });
 }
 
 gulp.task("run-all", ["prepare"], async function () {
     const results = await run();
 
-    for (const result of results) {
-        logResults(result);
-    }
+    logResults(results);
     
     const xml = compileXml(results);
 
     fs.writeFileSync("TestResults.xml", xml);
+    
+    if (results.find(r => r.overall.failed > 0)) {
+        throw new Error("Tests did not pass.");
+    }
 });
