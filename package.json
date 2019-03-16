@@ -1,6 +1,6 @@
 {
   "name": "qunit-puppeteer",
-  "version": "1.0.0",
+  "version": "1.0.0-rc.1",
   "description": "Runs QUnit tests in a Puppeteer instance and compiles results to JUnit XML",
   "main": "qunit-puppeteer.js",
   "scripts": {
