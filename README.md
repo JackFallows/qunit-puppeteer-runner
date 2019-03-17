@@ -167,7 +167,7 @@ It supports the following options:
 * source *(required)*, e.g. `-source "./test/*.js"`
 * debug, e.g. `--debug`
 * consolePassthrough, e.g. `--consolePassthrough`
-* globalDependencies, e.g. `globalDependencies [\"my-dependency.js\"]`
+* globalDependencies, e.g. `-globalDependencies [\"my-dependency.js\"]`
 
 **Note**: The use of `-` and `--` to prefix the options is meaningful. `-` represents an option which has an associated value (e.g. `-source`), whereas `--` represents a boolean switch, e.g. `--debug`.
 
