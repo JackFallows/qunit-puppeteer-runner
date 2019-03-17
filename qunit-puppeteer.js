@@ -90,9 +90,17 @@ function logResults(results) {
             for (const test of failedTests) {
                 for (const assertion of test.assertions.filter(a => !a.result)) {
                     writeErrorLine(assertion.message);
-                    writeErrorLine(`Module: ${test.module}`);
-                    writeErrorLine(`Test: ${test.name}`);
-                    writeErrorLine(test.source);
+                    if (test.module) {
+                        writeErrorLine(`Module: ${test.module}`);
+                    }
+                    
+                    if (test.name) {
+                        writeErrorLine(`Test: ${test.name}`);
+                    }
+                    
+                    if (test.source) {
+                        writeErrorLine(test.source);
+                    }
                 }
             }
         } else {

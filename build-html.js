@@ -38,11 +38,14 @@ function buildHtml(dependencies, testsSource, htmlBody) {
             if (Array.isArray(window.sources)) {
                 const promises = [];
                 for (const source of window.sources) {
-                    promises.push(new Promise(resolve => {
+                    promises.push(new Promise((resolve, reject) => {
                         const script = document.createElement("script");
                         script.onload = function (e) {
                             resolve();
                         };
+                        script.onerror = function () {
+                            reject("Could not load " + this.src);
+                        }
                         
                         script.src = source;
                         

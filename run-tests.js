@@ -22,8 +22,12 @@ const runTests = async function (suites, consolePassthrough, debug) {
         const html = suite.html;
         await page.goto("file://" + path.resolve(html));
 
-        const { overall, results } = await page.evaluate("runTests()");
-        testResults.push({ file: suite.file, suite: suite.name, overall, results });
+        try {
+            const { overall, results } = await page.evaluate("runTests()");
+            testResults.push({ file: suite.file, suite: suite.name, overall, results });
+        } catch (err) {
+            testResults.push({ file: suite.file, suite: suite.name, overall: { failed: 1 }, results: [{ failed: 1, assertions: [{ result: false, message: err }] }] });
+        }
     }
 
     await browser.close();

@@ -1,6 +1,6 @@
 {
   "name": "qunit-puppeteer",
-  "version": "1.0.0-rc.1",
+  "version": "1.0.0-rc.2",
   "description": "Runs QUnit tests in a Puppeteer instance and compiles results to JUnit XML",
   "main": "qunit-puppeteer.js",
   "scripts": {
@@ -16,9 +16,13 @@
     "url": "https://github.com/JackFallows/qunit-puppeteer/issues"
   },
   "homepage": "https://github.com/JackFallows/qunit-puppeteer#readme",
+  "bin": {
+    "qunit-run": "./cli.js"
+  },
   "dependencies": {
     "glob": "^7.1.3",
     "puppeteer": "^1.13.0",
+    "qunit": "^2.9.2",
     "string-hash": "^1.1.3",
     "xml-escape": "^1.1.0"
   },
