@@ -58,7 +58,7 @@ The package exports 3 functions:
 ## initialise
 
 ```
-initialise(sources: string[, options: object]): function([suites: Array<string>]): Array<object>
+initialise(sources: string[, options: object]): function([suiteName: string]): Array<object>
 ```
 
 ### sources
