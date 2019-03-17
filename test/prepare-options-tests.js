@@ -48,35 +48,6 @@ describe("prepareOptions", function () {
         });
     });
     
-    describe("transformFileName", function () {
-        it("has a default if undefined", function () {
-            const { transformFileName } = prepareOptions({ transformFileName: undefined });
-            assert.equal(typeof (transformFileName), "function");
-        });
-        
-        it("has a default that uses the suiteName", function () {
-            const suiteName = "mySuite";
-            const { transformFileName } = prepareOptions({ transformFileName: undefined }, suiteName);
-            assert.equal(transformFileName(), `${suiteName}-results`);
-        });
-        
-        it("can be overridden", function () {
-            const { transformFileName } = prepareOptions({
-                transformFileName: () => "overridden"
-            });
-            
-            assert.equal(transformFileName(), "overridden");
-        });
-        
-        it("correctly passes the suiteName to the function", function () {
-            const { transformFileName } = prepareOptions({
-                transformFileName: (sn) => `overridden-${sn}`
-            });
-
-            assert.equal(transformFileName("suiteName"), "overridden-suiteName");
-        });
-    });
-    
     describe("htmlBody", function () {
         it("is an object with suiteName property that is an empty string if unprovided", function () {
             const { htmlBody } = prepareOptions({ htmlBody: undefined }, "suiteName");

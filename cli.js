@@ -24,12 +24,17 @@ if (!source.value) {
 }
 
 const debug = !!findOption("debug");
+const consolePassthrough = !!findOption("consolePassthrough");
+
+const globalDependencies = findKeyValuePair("globalDependencies");
 
 // console.log(source);
 // console.log(debug);
 
 const run = initialise(source.value, {
-    debug
+    debug,
+    consolePassthrough,
+    globalDependencies: globalDependencies.value ? JSON.parse(globalDependencies.value) : null
 });
 
 run().then(results => {

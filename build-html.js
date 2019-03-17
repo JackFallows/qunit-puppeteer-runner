@@ -18,6 +18,10 @@ function buildHtml(dependencies, testsSource, htmlBody) {
     ${`<script src="${testsSource}"></script>`}
     <div id="sources"></div>
     <script>
+        if (window.html) {
+            document.getElementsByTagName("body")[0].insertAdjacentHTML("afterbegin", window.html);
+        }
+    
         function runTests() {
             return new Promise((resolve, reject) => {
                 loadSources().then(() => {
@@ -26,7 +30,7 @@ function buildHtml(dependencies, testsSource, htmlBody) {
                     });
                       
                     QUnit.done(function (overall) {
-                      resolve({ overall, results: window.results });
+                        resolve({ overall, results: window.results });
                     });
                       
                     QUnit.start();

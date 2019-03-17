@@ -11,7 +11,7 @@ function prepareOptions(options, suiteName) {
         return { dependencies };
     }
 
-    let { globalDependencies, dependencies, transformFileName, htmlBody, consolePassthrough, debug } = options;
+    let { globalDependencies, dependencies, htmlBody, consolePassthrough, debug } = options;
     
     if (dependencies == null) {
         let tempDep = {};
@@ -37,12 +37,8 @@ function prepareOptions(options, suiteName) {
     } else {
         html = htmlBody || "";
     }
-
-    if (typeof (transformFileName) !== "function") {
-        transformFileName = () => `${suiteName}-results`;
-    }
     
-    return { dependencies, transformFileName, htmlBody: html, consolePassthrough, debug };
+    return { dependencies, htmlBody: html, consolePassthrough, debug };
 }
 
 module.exports = prepareOptions;
