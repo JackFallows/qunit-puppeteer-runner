@@ -22,7 +22,16 @@ const initialise = function (sources, options) {
     const suites = files.map(f => ({ name: path.basename(f, path.extname(f)), file: f }));
 
     async function run(suiteName) {
-        const pathToQunit = path.join(__dirname, "node_modules/qunit/qunit/qunit.js");
+        const qunitPath = "node_modules/qunit/qunit/qunit.js";
+        const localPathToQunit = path.join(process.cwd(), qunitPath);
+        const globalPathToQunit = path.join(__dirname, qunitPath);
+        let pathToQunit = "";
+        
+        if (fs.existsSync(localPathToQunit)) {
+            pathToQunit = localPathToQunit;
+        } else {
+            pathToQunit = globalPathToQunit;
+        }
         
         if (suiteName) {
             const suite = suites.find(s => s.name === suiteName);
