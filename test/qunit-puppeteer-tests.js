@@ -9,7 +9,7 @@ describe("qunit-puppeteer", function () {
             // create a test file
             const content = `QUnit.module("Timeout");
 
-QUnit.test("Pass after 10 seconds", function(assert) {
+QUnit.test("Pass after 5 seconds", function(assert) {
   const done = assert.async();
   setTimeout(function() { assert.ok(true); done(); }, 5000);
 });`;
@@ -31,7 +31,7 @@ QUnit.test("Pass after 10 seconds", function(assert) {
             // create a test file
             const content = `QUnit.module("Timeout");
 
-QUnit.test("Pass after 10 seconds", function(assert) {
+QUnit.test("Pass after 5 seconds", function(assert) {
   const done = assert.async();
   setTimeout(function() { assert.ok(true); done(); }, 5000);
 });`;
