@@ -173,6 +173,7 @@ qunit-run -source "./test/*.js"
 It supports the following options:
 
 * source *(required)*, e.g. `-source "./test/*.js"`
+* output, e.g. `-output "results.xml"`
 * debug, e.g. `--debug`
 * consolePassthrough, e.g. `--consolePassthrough`
 * globalDependencies, e.g. `-globalDependencies [\"my-dependency.js\"]`

@@ -23,6 +23,8 @@ if (!source.value) {
     throw "Source must be provided";
 }
 
+const output = findKeyValuePair("output");
+
 const debug = !!findOption("debug");
 const consolePassthrough = !!findOption("consolePassthrough");
 
@@ -36,4 +38,9 @@ const run = initialise(source.value, {
 
 run().then(results => {
     logResults(results);
+    
+    if (output.value) {
+        const fs = require("fs");
+        fs.writeFileSync(output.value, compileXml(results));
+    }
 }).catch(err => console.error(err));
