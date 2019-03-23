@@ -65,7 +65,7 @@ initialise(sources: string[, options: object]): function([suiteName: string]): A
 This is a Glob string to identify the JS test files.
 
 ### options
-An optional object for setting the various supported option of the test runner. See below for details.
+An optional object for setting the various supported options of the test runner. See below for details.
 
 ### Return value
 Returns a function that can be called to execute the test run on one or all test suites.
@@ -154,6 +154,14 @@ Decides whether to passthrough console output from the test run to the Node cons
 Decides whether to launch Puppeteer in non-headless mode, with DevTools open, enabling debugging with the `debugger;` statement. Default: `false`
 
 Passing as an object with a `delay` property set to a number of milliseconds will instigate a delay before Puppeteer loads the page. This is to give the Chromium browser window time to open before starting the tests. If the test code executes before the window is visible, execution may not pause on any breakpoints. Default: `1000` milliseconds.
+
+## qunitConfig
+
+**Type**: object
+
+Allows you to set any `QUnit.config` options. Note that `autostart` is always set to `false`. Some options may have no effect.
+
+See https://api.qunitjs.com/config/QUnit.config 
 
 # CLI
 
