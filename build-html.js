@@ -1,4 +1,4 @@
-function buildHtml(dependencies, testsSource, htmlBody) {
+function buildHtml(dependencies, testsSource, htmlBody, qunitConfig) {
     return `
 <html>
 <head>
@@ -7,13 +7,17 @@ function buildHtml(dependencies, testsSource, htmlBody) {
 <body>
     ${htmlBody || ""}
 
-    <script src="node_modules/qunit/qunit/qunit.js"></script>
 
     <script>
         window.results = [];
     
-        QUnit.config.autostart = false;
+        window.QUnit = {
+            config: ${JSON.stringify(qunitConfig)}
+        };
     </script>
+
+    <script src="node_modules/qunit/qunit/qunit.js"></script>
+
     ${dependencies.map(d => `<script src="${d}"></script>`).join("\n\t")}
     ${`<script src="${testsSource}"></script>`}
     <div id="sources"></div>

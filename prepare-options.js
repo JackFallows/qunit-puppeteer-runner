@@ -11,7 +11,7 @@ function prepareOptions(options, suiteName) {
         return { dependencies };
     }
 
-    let { globalDependencies, dependencies, htmlBody, consolePassthrough, debug } = options;
+    let { globalDependencies, dependencies, htmlBody, consolePassthrough, debug, qunitConfig } = options;
     
     if (dependencies == null) {
         let tempDep = {};
@@ -38,7 +38,10 @@ function prepareOptions(options, suiteName) {
         html = htmlBody || "";
     }
     
-    return { dependencies, htmlBody: html, consolePassthrough, debug };
+    qunitConfig = qunitConfig || {};
+    qunitConfig.autostart = false;
+    
+    return { dependencies, htmlBody: html, consolePassthrough, debug, qunitConfig };
 }
 
 module.exports = prepareOptions;

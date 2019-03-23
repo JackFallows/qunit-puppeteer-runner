@@ -26,9 +26,9 @@ const initialise = function (sources, options) {
             const suite = suites.find(s => s.name === suiteName);
 
             if (suite) {
-                const { dependencies, htmlBody } = prepareOptions(options, suiteName);
+                const { dependencies, htmlBody, qunitConfig } = prepareOptions(options, suiteName);
 
-                const htmlContent = buildHtml(dependencies[suiteName], suite.file, htmlBody[suiteName]);
+                const htmlContent = buildHtml(dependencies[suiteName], suite.file, htmlBody[suiteName], qunitConfig);
 
                 const fileName = `${suiteName}-${hashCode(htmlContent)}.html`;
                 fs.writeFileSync(fileName, htmlContent);
@@ -48,8 +48,8 @@ const initialise = function (sources, options) {
         }
 
         const suitesHtml = suites.map(suite => {
-            const { dependencies, htmlBody } = prepareOptions(options, suite.name);
-            const htmlContent = buildHtml(dependencies[suite.name], suite.file, htmlBody[suite.name]);
+            const { dependencies, htmlBody, qunitConfig } = prepareOptions(options, suite.name);
+            const htmlContent = buildHtml(dependencies[suite.name], suite.file, htmlBody[suite.name], qunitConfig);
             const fileName = `${suite.name}-${hashCode(htmlContent)}.html`;
             fs.writeFileSync(fileName, htmlContent);
 
