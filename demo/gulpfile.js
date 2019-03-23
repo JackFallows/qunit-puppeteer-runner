@@ -1,6 +1,6 @@
 const gulp = require("gulp");
 const fs = require("fs");
-const { initialise, logResults, compileXml } = require("../qunit-puppeteer");
+const { initialise, logResults, compileXml } = require("../qunit-puppeteer-runner");
 
 gulp.task("prepare", () => {
     return gulp.src("../node_modules/qunit/qunit/qunit.js")

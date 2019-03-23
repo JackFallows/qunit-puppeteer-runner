@@ -1,8 +1,8 @@
 const { assert, expect } = require("chai");
 const fs = require("fs");
-const { initialise } = require("../qunit-puppeteer");
+const { initialise } = require("../qunit-puppeteer-runner");
 
-describe("qunit-puppeteer", function () {
+describe("qunit-puppeteer-runner", function () {
     describe("test-timeout", function () {
         it("will pass after 5 seconds", async function () {
             this.timeout(10000);
@@ -16,7 +16,7 @@ QUnit.test("Pass after 5 seconds", function(assert) {
 
             fs.writeFileSync("test.js", content);
 
-            // run qunit-puppeteer
+            // run qunit-puppeteer-runner
             const run = initialise("test.js", {});
             const results = await run();
 
@@ -38,7 +38,7 @@ QUnit.test("Pass after 5 seconds", function(assert) {
             
             fs.writeFileSync("test.js", content);
             
-            // run qunit-puppeteer
+            // run qunit-puppeteer-runner
             const run = initialise("test.js", { qunitConfig: { testTimeout: 2000 } });
             const results = await run();
             

@@ -1,4 +1,4 @@
-# qunit-puppeteer
+# qunit-puppeteer-runner
 Runs QUnit tests in a Puppeteer instance and compiles the results to JUnit XML.
 
 # Requirements
@@ -8,7 +8,7 @@ This plugin uses `async`/`await`, so Node 7.6+ is required.
 # Install
 
 ```
-npm install --save-dev qunit-puppeteer
+npm install --save-dev qunit-puppeteer-runner
 ```
 
 # Usage
@@ -16,7 +16,7 @@ npm install --save-dev qunit-puppeteer
 ```
 const gulp = require("gulp");
 const fs = require("fs");
-const { initialise, logResults, compileXml } = require("qunit-puppeteer");
+const { initialise, logResults, compileXml } = require("qunit-puppeteer-runner");
 
 const run = initialise("./test/*.js", {
     globalDependencies: ["./test-namespaces.js"]

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const { initialise, logResults, compileXml } = require("./qunit-puppeteer");
+const { initialise, logResults, compileXml } = require("./qunit-puppeteer-runner");
 
 const [,, ...args] = process.argv;
 

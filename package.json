@@ -1,21 +1,21 @@
 {
-  "name": "qunit-puppeteer",
+  "name": "qunit-puppeteer-runner",
   "version": "1.0.0-rc.2",
   "description": "Runs QUnit tests in a Puppeteer instance and compiles results to JUnit XML",
-  "main": "qunit-puppeteer.js",
+  "main": "qunit-puppeteer-runner.js",
   "scripts": {
     "test": "mocha"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JackFallows/qunit-puppeteer.git"
+    "url": "git+https://github.com/JackFallows/qunit-puppeteer-runner.git"
   },
   "author": "Jack Fallows",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/JackFallows/qunit-puppeteer/issues"
+    "url": "https://github.com/JackFallows/qunit-puppeteer-runner/issues"
   },
-  "homepage": "https://github.com/JackFallows/qunit-puppeteer#readme",
+  "homepage": "https://github.com/JackFallows/qunit-puppeteer-runner#readme",
   "bin": {
     "qunit-run": "./cli.js"
   },
