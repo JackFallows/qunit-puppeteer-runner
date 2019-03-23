@@ -1,4 +1,4 @@
-function buildHtml(dependencies, testsSource, htmlBody, qunitConfig) {
+function buildHtml(dependencies, testsSource, htmlBody, pathToQunit, qunitConfig) {
     return `
 <html>
 <head>
@@ -16,7 +16,7 @@ function buildHtml(dependencies, testsSource, htmlBody, qunitConfig) {
         };
     </script>
 
-    <script src="node_modules/qunit/qunit/qunit.js"></script>
+    <script src="${pathToQunit}"></script>
 
     ${dependencies.map(d => `<script src="${d}"></script>`).join("\n\t")}
     ${`<script src="${testsSource}"></script>`}

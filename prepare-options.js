@@ -2,13 +2,13 @@ function prepareOptions(options, suiteName) {
     if (options == null) {
         let dependencies = {};
         dependencies[suiteName] = [];
-        return { dependencies };
+        return { dependencies, qunitConfig: { autostart: false }, htmlBody: {} };
     }
     
     if (Array.isArray(options)) {
         let dependencies = {};
         dependencies[suiteName] = options;
-        return { dependencies };
+        return { dependencies, qunitConfig: { autostart: false }, htmlBody: {} };
     }
 
     let { globalDependencies, dependencies, htmlBody, consolePassthrough, debug, qunitConfig } = options;

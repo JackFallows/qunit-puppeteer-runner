@@ -28,9 +28,6 @@ const consolePassthrough = !!findOption("consolePassthrough");
 
 const globalDependencies = findKeyValuePair("globalDependencies");
 
-// console.log(source);
-// console.log(debug);
-
 const run = initialise(source.value, {
     debug,
     consolePassthrough,

@@ -22,13 +22,15 @@ const initialise = function (sources, options) {
     const suites = files.map(f => ({ name: path.basename(f, path.extname(f)), file: f }));
 
     async function run(suiteName) {
+        const pathToQunit = path.join(__dirname, "node_modules/qunit/qunit/qunit.js");
+        
         if (suiteName) {
             const suite = suites.find(s => s.name === suiteName);
 
             if (suite) {
                 const { dependencies, htmlBody, qunitConfig } = prepareOptions(options, suiteName);
 
-                const htmlContent = buildHtml(dependencies[suiteName], suite.file, htmlBody[suiteName], qunitConfig);
+                const htmlContent = buildHtml(dependencies[suiteName], suite.file, htmlBody[suiteName], pathToQunit, qunitConfig);
 
                 const fileName = `${suiteName}-${hashCode(htmlContent)}.html`;
                 fs.writeFileSync(fileName, htmlContent);
@@ -49,7 +51,7 @@ const initialise = function (sources, options) {
 
         const suitesHtml = suites.map(suite => {
             const { dependencies, htmlBody, qunitConfig } = prepareOptions(options, suite.name);
-            const htmlContent = buildHtml(dependencies[suite.name], suite.file, htmlBody[suite.name], qunitConfig);
+            const htmlContent = buildHtml(dependencies[suite.name], suite.file, htmlBody[suite.name], pathToQunit, qunitConfig);
             const fileName = `${suite.name}-${hashCode(htmlContent)}.html`;
             fs.writeFileSync(fileName, htmlContent);
 
@@ -57,7 +59,7 @@ const initialise = function (sources, options) {
         });
 
         const results = await runTests(suitesHtml, consolePassthrough, debug);
-
+        
         for (const suite of suitesHtml) {
             fs.unlinkSync(suite.html);
         }
