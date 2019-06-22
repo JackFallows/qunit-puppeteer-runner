@@ -14,7 +14,17 @@ const run = initialise("./test/*.js", {
         "tests3": "<span id='my-elem'></span>"
     },
     consolePassthrough: true,
-    debug: false
+    debug: false,
+    qunitCallbacks: {
+        done: [function () {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    console.log("Hello world!");
+                    resolve();
+                }, 2000);
+            })
+        }, function () { console.log("Hi!"); }]
+    }
 });
 
 for (const suite of run.suites) {

@@ -96,4 +96,25 @@ describe("prepareOptions", function () {
             assert.equal(debug.delay, 10);
         });
     });
+    
+    describe("qunitCallbacks", function () {
+        it("accepts done callback", function () {
+            const { qunitCallbacks } = prepareOptions({ qunitCallbacks: { done: function () {} } });
+            assert.isFunction(qunitCallbacks.done);
+        });
+        
+        it("removes unknown callback", function () {
+            const { qunitCallbacks } = prepareOptions({ qunitCallbacks: { asd: function () {} } });
+            assert.isUndefined(qunitCallbacks.asd);
+        });
+        
+        it("supports array of callbacks", function () {
+            const { qunitCallbacks } = prepareOptions({ qunitCallbacks: { done: [function () {}, function () {}] } });
+            assert.isArray(qunitCallbacks.done);
+            assert.lengthOf(qunitCallbacks.done, 2);
+            for (const callback of qunitCallbacks.done) {
+                assert.isFunction(callback);
+            }
+        });
+    });
 });

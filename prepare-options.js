@@ -11,7 +11,7 @@ function prepareOptions(options, suiteName) {
         return { dependencies, qunitConfig: { autostart: false }, htmlBody: {} };
     }
 
-    let { globalDependencies, dependencies, htmlBody, consolePassthrough, debug, qunitConfig } = options;
+    let { globalDependencies, dependencies, htmlBody, consolePassthrough, debug, qunitConfig, qunitCallbacks } = options;
     
     if (dependencies == null) {
         let tempDep = {};
@@ -41,7 +41,25 @@ function prepareOptions(options, suiteName) {
     qunitConfig = qunitConfig || {};
     qunitConfig.autostart = false;
     
-    return { dependencies, htmlBody: html, consolePassthrough, debug, qunitConfig };
+    const acceptableCallbacks = [
+        "begin",
+        "done",
+        "log",
+        "moduleDone",
+        "moduleStart",
+        "on",
+        "testDone",
+        "testStart"
+    ];
+    
+    const callbacks = {};
+    for (const callback in qunitCallbacks) {
+        if (qunitCallbacks.hasOwnProperty(callback) && acceptableCallbacks.includes(callback)) {
+            callbacks[callback] = qunitCallbacks[callback];
+        }
+    }
+    
+    return { dependencies, htmlBody: html, consolePassthrough, debug, qunitConfig, qunitCallbacks: callbacks };
 }
 
 module.exports = prepareOptions;

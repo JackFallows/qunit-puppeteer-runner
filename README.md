@@ -163,6 +163,32 @@ Allows you to set any `QUnit.config` options. Note that `autostart` is always se
 
 See https://api.qunitjs.com/config/QUnit.config 
 
+## qunitCallbacks
+
+**Type**: object
+
+Allows you to set QUnit callbacks, which will be executed in the browser context, before any callbacks that are added by this tool.
+
+The object can contain a single function for each callback, or an array of functions, e.g.
+
+```
+qunitCallbacks: {
+    begin: [
+        function () {
+            // do something
+        },
+        function () {
+            // do something else
+        }
+    ],
+    done: function () {
+        // do something
+    }
+}
+```
+
+See https://api.qunitjs.com/callbacks/
+
 # CLI
 
 The package includes a CLI tool to run tests via the command line called `qunit-run`. It can be used as follows:

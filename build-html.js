@@ -1,4 +1,4 @@
-function buildHtml(dependencies, testsSource, htmlBody, pathToQunit, qunitConfig) {
+function buildHtml(dependencies, testsSource, htmlBody, pathToQunit, qunitConfig, qunitCallbacks) {
     return `
 <html>
 <head>
@@ -29,6 +29,30 @@ function buildHtml(dependencies, testsSource, htmlBody, pathToQunit, qunitConfig
         function runTests() {
             return new Promise((resolve, reject) => {
                 loadSources().then(() => {
+                    const callbacks = ${JSON.stringify(Object.getOwnPropertyNames(qunitCallbacks).reduce((all, key) => {
+                        const value = qunitCallbacks[key];
+                        if (Array.isArray(value)) {
+                            all[key] = value.map(v => v.toString());
+                        } else {
+                            all[key] = value.toString();
+                        }
+                        
+                        return all;
+                    }, {}))};
+                    for (const key in callbacks) {
+                        if (!callbacks.hasOwnProperty(key)){
+                            continue;
+                        }
+                        
+                        if (Array.isArray(callbacks[key])) {
+                            for (const callback of callbacks[key]) {
+                                QUnit[key](eval("f = " + callback));
+                            }
+                        } else {
+                            QUnit[key](eval("f = " + callbacks[key]));
+                        }
+                    }
+                    
                     QUnit.testDone(function(testResult) {
                         window.results.push(testResult);
                     });
