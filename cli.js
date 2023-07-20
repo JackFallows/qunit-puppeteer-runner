@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+const path = require("path");
+const fs = require("fs");
 const { initialise, logResults, compileXml } = require("./qunit-puppeteer-runner");
 
 const [,, ...args] = process.argv;
@@ -32,7 +34,15 @@ const settingsJs = findKeyValuePair("settings");
 
 let settings = null;
 if (settingsJs.value) {
-    settings = require(settingsJs.value);
+    const settingsPath = settingsJs.value;
+    const localSettingsPath = path.join(process.cwd(), settingsPath);
+    const globalSettingsPath = path.join(__dirname, settingsPath);
+
+    const pathToSettings = fs.existsSync(localSettingsPath)
+        ? localSettingsPath
+        : globalSettingsPath;
+
+    settings = require(pathToSettings);
 }
 
 const run = initialise(source.value, {
