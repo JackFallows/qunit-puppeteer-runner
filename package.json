@@ -16,6 +16,11 @@
     "url": "https://github.com/JackFallows/qunit-puppeteer-runner/issues"
   },
   "homepage": "https://github.com/JackFallows/qunit-puppeteer-runner#readme",
+  "keywords": [
+    "qunit",
+    "qunit-plugin",
+    "puppeteer"
+  ],
   "bin": {
     "qunit-run": "./cli.js"
   },
