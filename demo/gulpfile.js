@@ -1,6 +1,9 @@
 const { src, dest, series } = require("gulp");
+const yargs = require("yargs");
 const fs = require("fs");
 const { initialise, logResults, compileXml } = require("../qunit-puppeteer-runner");
+
+const debug = yargs.argv.debug;
 
 module.exports = {
     runAll: series(prepare, runAll)
@@ -13,7 +16,7 @@ const run = initialise("./test/*.js", {
         "tests3": "<span id='my-elem'></span>"
     },
     consolePassthrough: true,
-    debug: false,
+    debug: !!debug,
     qunitCallbacks: {
         done: [function () {
             return new Promise(resolve => {

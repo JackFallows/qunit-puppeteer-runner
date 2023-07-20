@@ -2,7 +2,7 @@ const puppeteer = require("puppeteer");
 const path = require("path");
 
 const runTests = async function (suites, consolePassthrough, debug) {
-    const browser = await puppeteer.launch({ devtools: !!debug });
+    const browser = await puppeteer.launch({ devtools: !!debug, headless: !!debug ? false : 'new' });
     const page = await browser.newPage();
 
     if (debug) {
