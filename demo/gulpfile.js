@@ -1,11 +1,10 @@
-const gulp = require("gulp");
+const { src, dest, series } = require("gulp");
 const fs = require("fs");
 const { initialise, logResults, compileXml } = require("../qunit-puppeteer-runner");
 
-gulp.task("prepare", () => {
-    return gulp.src("../node_modules/qunit/qunit/qunit.js")
-        .pipe(gulp.dest("./node_modules/qunit/qunit"));
-});
+module.exports = {
+    runAll: series(prepare, runAll)
+}
 
 const run = initialise("./test/*.js", {
     globalDependencies: ["./test-namespaces.js"],
@@ -27,8 +26,13 @@ const run = initialise("./test/*.js", {
     }
 });
 
+function prepare() {
+    return src("../node_modules/qunit/qunit/qunit.js")
+        .pipe(dest("./node_modules/qunit/qunit"));
+}
+
 for (const suite of run.suites) {
-    gulp.task("run-" + suite, ["prepare"], async function () {
+    async function test() {
         const results = await run(suite);
 
         logResults(results);
@@ -39,10 +43,12 @@ for (const suite of run.suites) {
         if (results.find(r => r.overall.failed > 0)) {
             throw new Error("Tests did not pass.");
         }
-    });
+    }
+
+    module.exports[`run-${suite}`] = series(prepare, test);
 }
 
-gulp.task("run-all", ["prepare"], async function () {
+async function runAll() {
     const results = await run();
 
     logResults(results);
@@ -54,4 +60,4 @@ gulp.task("run-all", ["prepare"], async function () {
     if (results.find(r => r.overall.failed > 0)) {
         throw new Error("Tests did not pass.");
     }
-});
+}
