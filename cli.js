@@ -28,12 +28,19 @@ const output = findKeyValuePair("output");
 const debug = !!findOption("debug");
 const consolePassthrough = !!findOption("consolePassthrough");
 
-const globalDependencies = findKeyValuePair("globalDependencies");
+const settingsJs = findKeyValuePair("settings");
+
+let settings = null;
+if (settingsJs.value) {
+    settings = require(settingsJs.value);
+}
 
 const run = initialise(source.value, {
-    debug,
-    consolePassthrough,
-    globalDependencies: globalDependencies.value ? JSON.parse(globalDependencies.value) : null
+    ...settings,
+    ...{
+        debug,
+        consolePassthrough
+    }
 });
 
 run().then(results => {

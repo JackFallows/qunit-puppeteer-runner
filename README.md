@@ -198,12 +198,10 @@ qunit-run -source "./test/*.js"
 
 It supports the following options:
 
-* source *(required)*, e.g. `-source "./test/*.js"`
-* output, e.g. `-output "results.xml"`
-* debug, e.g. `--debug`
-* consolePassthrough, e.g. `--consolePassthrough`
-* globalDependencies, e.g. `-globalDependencies [\"my-dependency.js\"]`
+* source *(required)*, e.g. `-source "./test/*.js"` - a glob string to identify the test suites
+* settings, e.g. `-settings "./settings.js"` - a CommonJS module which exports an options object as described above
+* output, e.g. `-output "results.xml"` - where to output the JUnit XML results
+* debug, e.g. `--debug` - whether to run in debug mode (overrides the value in the `settings` module)
+* consolePassthrough, e.g. `--consolePassthrough` - whether to pass through console output (overrides the value in the `settings` module)
 
 **Note**: The use of `-` and `--` to prefix the options is meaningful. `-` represents an option which has an associated value (e.g. `-source`), whereas `--` represents a boolean switch, e.g. `--debug`.
-
-Individual test suite dependencies, and HTML body content, can be set respectively using the `window.sources` and `window.html` variables in the test files, as described above. 
