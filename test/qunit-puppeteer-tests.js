@@ -9,9 +9,13 @@ describe("qunit-puppeteer-runner", function () {
             // create a test file
             const content = `QUnit.module("Timeout");
 
-QUnit.test("Pass after 5 seconds", function(assert) {
-  const done = assert.async();
-  setTimeout(function() { assert.ok(true); done(); }, 5000);
+QUnit.test("Pass after 5 seconds", async function(assert) {
+  return new Promise((r) => {
+    setTimeout(() => {
+      assert.ok(true);
+      r();
+    }, 5000);
+  });
 });`;
 
             fs.writeFileSync("test.js", content);
